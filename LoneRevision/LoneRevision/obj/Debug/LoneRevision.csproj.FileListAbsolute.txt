@@ -1,0 +1,6 @@
+c:\users\user\documents\visual studio 2013\Projects\LoneRevision\LoneRevision\bin\Debug\LoneRevision.exe.config
+C:\Users\user\Documents\Visual Studio 2013\Projects\LoneRevision\LoneRevision\bin\Debug\LoneRevision.exe
+C:\Users\user\Documents\Visual Studio 2013\Projects\LoneRevision\LoneRevision\bin\Debug\LoneRevision.pdb
+C:\Users\user\Documents\Visual Studio 2013\Projects\LoneRevision\LoneRevision\obj\Debug\LoneRevision.exe
+C:\Users\user\Documents\Visual Studio 2013\Projects\LoneRevision\LoneRevision\obj\Debug\LoneRevision.pdb
+C:\Users\user\Documents\Visual Studio 2013\Projects\LoneRevision\LoneRevision\obj\Debug\LoneRevision.csprojResolveAssemblyReference.cache
