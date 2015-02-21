@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="SolidaVolymer.Program" Collapsed="true">
+    <Position X="1" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SolidaVolymer.Solid" Collapsed="true">
+    <Position X="5" Y="0.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>CAAIAAAABACgAABEAAAIAAAAAAAAAAAAAAIACAAAAAA=</HashCode>
+      <FileName>Solid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SolidaVolymer.Cylinder">
+    <Position X="2.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAIACAAAAAA=</HashCode>
+      <FileName>Cylinder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SolidaVolymer.CircularCone">
+    <Position X="9.75" Y="2" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAIACAAAAAA=</HashCode>
+      <FileName>CircularCone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="SolidaVolymer.SolidType" Collapsed="true">
+    <Position X="9" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>SolidType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
