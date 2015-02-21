@@ -7,23 +7,23 @@ namespace SolidaVolymer
 {
     class CircularCone : Solid
     {
-        public override double BaseArea // Räknar ut konens basarea
+        public override double BaseArea
         {
              get { return RadiusSquared * Math.PI; }
         }
 
-        public override double SurfaceArea // Räknar ut konens ytarea
+        public override double SurfaceArea 
         {
              get { return (Radius + Math.Sqrt(RadiusSquared + HeightSquared)) * Radius * Math.PI; }
         }
 
-        public override double Volume // Räknar ut konens volym
+        public override double Volume 
         {
              get { return Height * RadiusSquared * (Math.PI / 3.0); }
         }
 
         public CircularCone(double radius, double height)
-          : base(radius, height) // Anropar Solids konstuktor
+          : base(radius, height) 
         {}
     }
 }

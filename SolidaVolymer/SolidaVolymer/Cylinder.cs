@@ -7,20 +7,20 @@ namespace SolidaVolymer
 {
     class Cylinder : Solid
     {
-        public override double BaseArea // Räknar ut cylinderns basarea
+        public override double BaseArea
         {
             get { return RadiusSquared * Math.PI; }
         }
-        public override double SurfaceArea // Räknar ut cylinderns ytarea
+        public override double SurfaceArea 
         {
             get { return (Height + Radius) * Radius * Math.PI * 2; }
         }
-        public override double Volume // Räknar ut cylinderns volym
+        public override double Volume 
         {
             get { return Height * RadiusSquared * Math.PI; }
         }
         public Cylinder(double radius, double height)
-            : base(radius, height) // Anropar Solids konstuktor
+            : base(radius, height) 
         { }
     }
 }
