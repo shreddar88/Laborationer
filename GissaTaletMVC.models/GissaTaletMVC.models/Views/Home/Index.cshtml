@@ -1,0 +1,70 @@
+﻿@model GissaTaletMVC.Models.SecretNumber
+
+@{
+    ViewBag.Title = "Gissa talet";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<body>
+    <main>
+        <center>
+            <div class="container">
+                @using (Html.BeginForm())
+                {
+                    if (Model.LastGuessedNumber.Outcome != GissaTaletMVC.Models.Outcome.Right)
+                    {
+                        
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary()
+                        <div>
+                            <p>
+                                <center><br />
+                               
+                                    <div style="background-color:grey;border-radius:100px"><br /><h2 style="color:white">Gissa ett tal mellan 1 och 100</h2><br /></div><br />
+                                    <h3>@Model.GuessTrack</h3>
+                                    <input class="input-sm" style="width:50px; margin: 5px 5px;" name="number" autofocus disabled="@(!Model.CanMakeGuess)" /><br />
+                                    <button class="btn btn-primary" type="submit" disabled="@(!Model.CanMakeGuess)">Skicka Gissning</button>
+                                   
+                                </center>
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <h3><strong>Rätt Gissat!</strong></h3>
+                    }
+                }
+                @if (Model.Count > 0) //Listan börjar skrivas ut här!
+                {
+                    int number = 1;
+                    <p>@Model.Message(Model.LastGuessedNumber.Outcome)</p>
+                    <div style="border:2px solid black;text-align:center;display:inline-block">
+                        @foreach (var guess in Model.GuessedNumbers)
+                        {
+                            <div class=" pull-left" style="width:60px;display:inline-block">
+                                <div style="background-color:black;color:white">@number</div>
+                                @switch (guess.Outcome)
+                                {
+                                    case GissaTaletMVC.Models.Outcome.Right:
+                                        <div class="bg-success">&#10003;<br />@guess.Number</div>
+                                        break;
+                                    case GissaTaletMVC.Models.Outcome.High:
+                                    <div class="bg-danger">&darr;<br />@guess.Number</div>
+                                        break;
+                                    case GissaTaletMVC.Models.Outcome.Low:
+                                    <div class="bg-warning">&uarr;<br />@guess.Number</div>
+                                        break;
+                                }
+                            </div>
+                                number++;
+                        }
+                        
+                    </div>
+                    <div class="clearfix"></div>
+                    @Html.ActionLink("Slumpa nytt hemligt tal!", "NewPage")
+                }
+                <div class="border" style="height: 5px; margin: 8px 0 8px 0; background-color: grey;"></div>
+                <div class="footer"><p class="form-group"> - Gissa det hemliga talet -<br /> Àsgeir SN14<br /> @DateTime.Now</p></div>
+            </div>
+        </center>
+    </main>
+</body>
