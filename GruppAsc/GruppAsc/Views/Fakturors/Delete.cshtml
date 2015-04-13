@@ -1,0 +1,72 @@
+﻿@model GruppAsc.Models.Fakturor
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Fakturor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Datum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Datum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArbetsTimmar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArbetsTimmar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OCRNummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OCRNummer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bestallningar.BID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bestallningar.BID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status.Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status.Value)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

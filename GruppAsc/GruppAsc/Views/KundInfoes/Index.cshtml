@@ -1,0 +1,40 @@
+﻿@model IEnumerable<GruppAsc.Models.KundInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Kundinfo</h2>
+
+<p>
+    @Html.ActionLink("Lägg till kund", "Create")
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.ForetagsNamn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForetagsNamn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adress)
+        </td>
+        <td>
+            @Html.ActionLink("Ändra", "Edit", new { id=item.KID }) |
+            @Html.ActionLink("Detaljer", "Details", new { id=item.KID }) |
+            @Html.ActionLink("Ta bort", "Delete", new { id=item.KID })
+        </td>
+    </tr>
+}
+
+</table>

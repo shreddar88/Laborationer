@@ -1,0 +1,94 @@
+﻿@model IEnumerable<GruppAsc.Models.vPresentation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Kundlista</h2>
+
+
+@using (Html.BeginForm())
+{
+    <p class ="sokruta">
+        Sök på företag: @Html.TextBox("SearchString")
+        <input type="submit" value="Filter" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ForetagsNamn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.ArbetsTimmar)
+        </th>
+         
+      
+        <th>
+            @Html.DisplayNameFor(model => model.ArbetsPeriod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FID)
+        </th> 
+        <th>
+            @Html.DisplayNameFor(model => model.Value)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForetagsNamn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.ArbetsTimmar)
+            </td>
+         
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.ArbetsPeriod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FID)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.FID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.FID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.FID })
+                </td>*@
+        </tr>
+    }
+</table>        @*<tr>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+    </table>*@

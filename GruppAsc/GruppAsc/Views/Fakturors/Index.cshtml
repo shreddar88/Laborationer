@@ -1,0 +1,63 @@
+﻿@model IEnumerable<GruppAsc.Models.Fakturor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Fakturor</h2>
+
+<p>
+    @Html.ActionLink("Lägg till faktura", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Datum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArbetsTimmar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OCRNummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bestallningar.BID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status.Value)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArbetsTimmar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OCRNummer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bestallningar.BID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.Value)
+        </td>
+        <td>
+            @Html.ActionLink("Ändra", "Edit", new { id=item.FID }) |
+            @Html.ActionLink("Detaljer", "Details", new { id=item.FID }) |
+            @Html.ActionLink("Ta bort", "Delete", new { id=item.FID })
+        </td>
+    </tr>
+}
+
+</table>

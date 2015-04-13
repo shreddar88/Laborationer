@@ -1,0 +1,42 @@
+﻿@model GruppAsc.Models.Bestallningar
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bestallningar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Datum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Datum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArbetsPeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArbetsPeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KundInfo.ForetagsNamn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KundInfo.ForetagsNamn)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GruppAsc.Models.Bestallningar>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Beställningar</h2>
+
+<p>
+    @Html.ActionLink("Lägg till beställning", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Datum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArbetsPeriod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KundInfo.ForetagsNamn)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArbetsPeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KundInfo.ForetagsNamn)
+        </td>
+        <td>
+            @Html.ActionLink("Ändra", "Edit", new { id=item.BID }) |
+            @Html.ActionLink("Detaljer", "Details", new { id=item.BID }) |
+            @Html.ActionLink("Ta bort", "Delete", new { id=item.BID })
+        </td>
+    </tr>
+}
+
+</table>

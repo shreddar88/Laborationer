@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AsciModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bestallningar">
+          <Key>
+            <PropertyRef Name="BID" />
+          </Key>
+          <Property Name="BID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KID" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="date" Nullable="false" />
+          <Property Name="ArbetsPeriod" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fakturor">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BID" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="date" Nullable="false" />
+          <Property Name="SubTotal" Type="money" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="ArbetsTimmar" Type="int" Nullable="false" />
+          <Property Name="OCRNummer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KundInfo">
+          <Key>
+            <PropertyRef Name="KID" />
+          </Key>
+          <Property Name="KID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ForetagsNamn" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Asci.dbo.vPresentation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vPresentation">
+          <Key>
+            <PropertyRef Name="ForetagsNamn" />
+            <PropertyRef Name="Adress" />
+            <PropertyRef Name="FID" />
+            <PropertyRef Name="ArbetsTimmar" />
+            <PropertyRef Name="Datum" />
+            <PropertyRef Name="SubTotal" />
+            <PropertyRef Name="ArbetsPeriod" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="ForetagsNamn" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FID" Type="int" Nullable="false" />
+          <Property Name="ArbetsTimmar" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="date" Nullable="false" />
+          <Property Name="SubTotal" Type="money" Nullable="false" />
+          <Property Name="ArbetsPeriod" Type="date" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bestallningar_FID">
+          <End Role="Bestallningar" Type="Self.Bestallningar" Multiplicity="1" />
+          <End Role="Fakturor" Type="Self.Fakturor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bestallningar">
+              <PropertyRef Name="BID" />
+            </Principal>
+            <Dependent Role="Fakturor">
+              <PropertyRef Name="BID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fakturor_StatusID">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Fakturor" Type="Self.Fakturor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Fakturor">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KundInfon_KID">
+          <End Role="KundInfo" Type="Self.KundInfo" Multiplicity="1" />
+          <End Role="Bestallningar" Type="Self.Bestallningar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KundInfo">
+              <PropertyRef Name="KID" />
+            </Principal>
+            <Dependent Role="Bestallningar">
+              <PropertyRef Name="KID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AsciModelStoreContainer">
+          <EntitySet Name="Bestallningar" EntityType="Self.Bestallningar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fakturor" EntityType="Self.Fakturor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KundInfo" EntityType="Self.KundInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vPresentation" EntityType="Self.vPresentation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vPresentation].[ForetagsNamn] AS [ForetagsNamn], 
+    [vPresentation].[Adress] AS [Adress], 
+    [vPresentation].[FID] AS [FID], 
+    [vPresentation].[ArbetsTimmar] AS [ArbetsTimmar], 
+    [vPresentation].[Datum] AS [Datum], 
+    [vPresentation].[SubTotal] AS [SubTotal], 
+    [vPresentation].[ArbetsPeriod] AS [ArbetsPeriod], 
+    [vPresentation].[Value] AS [Value]
+    FROM [dbo].[vPresentation] AS [vPresentation]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Bestallningar_FID" Association="Self.FK_Bestallningar_FID">
+            <End Role="Bestallningar" EntitySet="Bestallningar" />
+            <End Role="Fakturor" EntitySet="Fakturor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fakturor_StatusID" Association="Self.FK_Fakturor_StatusID">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Fakturor" EntitySet="Fakturor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KundInfon_KID" Association="Self.FK_KundInfon_KID">
+            <End Role="KundInfo" EntitySet="KundInfo" />
+            <End Role="Bestallningar" EntitySet="Bestallningar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AsciModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bestallningar">
+          <Key>
+            <PropertyRef Name="BID" />
+          </Key>
+          <Property Name="BID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KID" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ArbetsPeriod" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Fakturors" Relationship="Self.FK_Bestallningar_FID" FromRole="Bestallningar" ToRole="Fakturor" />
+          <NavigationProperty Name="KundInfo" Relationship="Self.FK_KundInfon_KID" FromRole="Bestallningar" ToRole="KundInfo" />
+        </EntityType>
+        <EntityType Name="Fakturor">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BID" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SubTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="ArbetsTimmar" Type="Int32" Nullable="false" />
+          <Property Name="OCRNummer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bestallningar" Relationship="Self.FK_Bestallningar_FID" FromRole="Fakturor" ToRole="Bestallningar" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Fakturor_StatusID" FromRole="Fakturor" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="KundInfo">
+          <Key>
+            <PropertyRef Name="KID" />
+          </Key>
+          <Property Name="KID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForetagsNamn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Bestallningars" Relationship="Self.FK_KundInfon_KID" FromRole="KundInfo" ToRole="Bestallningar" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Fakturors" Relationship="Self.FK_Fakturor_StatusID" FromRole="Status" ToRole="Fakturor" />
+        </EntityType>
+        <EntityType Name="vPresentation">
+          <Key>
+            <PropertyRef Name="ForetagsNamn" />
+            <PropertyRef Name="Adress" />
+            <PropertyRef Name="FID" />
+            <PropertyRef Name="ArbetsTimmar" />
+            <PropertyRef Name="Datum" />
+            <PropertyRef Name="SubTotal" />
+            <PropertyRef Name="ArbetsPeriod" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="ForetagsNamn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FID" Type="Int32" Nullable="false" />
+          <Property Name="ArbetsTimmar" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SubTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ArbetsPeriod" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bestallningar_FID">
+          <End Role="Bestallningar" Type="Self.Bestallningar" Multiplicity="1" />
+          <End Role="Fakturor" Type="Self.Fakturor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bestallningar">
+              <PropertyRef Name="BID" />
+            </Principal>
+            <Dependent Role="Fakturor">
+              <PropertyRef Name="BID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KundInfon_KID">
+          <End Role="KundInfo" Type="Self.KundInfo" Multiplicity="1" />
+          <End Role="Bestallningar" Type="Self.Bestallningar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KundInfo">
+              <PropertyRef Name="KID" />
+            </Principal>
+            <Dependent Role="Bestallningar">
+              <PropertyRef Name="KID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fakturor_StatusID">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Fakturor" Type="Self.Fakturor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Fakturor">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AsciEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bestallningars" EntityType="Self.Bestallningar" />
+          <EntitySet Name="Fakturors" EntityType="Self.Fakturor" />
+          <EntitySet Name="KundInfoes" EntityType="Self.KundInfo" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="vPresentations" EntityType="Self.vPresentation" />
+          <AssociationSet Name="FK_Bestallningar_FID" Association="Self.FK_Bestallningar_FID">
+            <End Role="Bestallningar" EntitySet="Bestallningars" />
+            <End Role="Fakturor" EntitySet="Fakturors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KundInfon_KID" Association="Self.FK_KundInfon_KID">
+            <End Role="KundInfo" EntitySet="KundInfoes" />
+            <End Role="Bestallningar" EntitySet="Bestallningars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fakturor_StatusID" Association="Self.FK_Fakturor_StatusID">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Fakturor" EntitySet="Fakturors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AsciModelStoreContainer" CdmEntityContainer="AsciEntities">
+          <EntitySetMapping Name="Bestallningars">
+            <EntityTypeMapping TypeName="AsciModel.Bestallningar">
+              <MappingFragment StoreEntitySet="Bestallningar">
+                <ScalarProperty Name="BID" ColumnName="BID" />
+                <ScalarProperty Name="KID" ColumnName="KID" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="ArbetsPeriod" ColumnName="ArbetsPeriod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fakturors">
+            <EntityTypeMapping TypeName="AsciModel.Fakturor">
+              <MappingFragment StoreEntitySet="Fakturor">
+                <ScalarProperty Name="FID" ColumnName="FID" />
+                <ScalarProperty Name="BID" ColumnName="BID" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="ArbetsTimmar" ColumnName="ArbetsTimmar" />
+                <ScalarProperty Name="OCRNummer" ColumnName="OCRNummer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KundInfoes">
+            <EntityTypeMapping TypeName="AsciModel.KundInfo">
+              <MappingFragment StoreEntitySet="KundInfo">
+                <ScalarProperty Name="KID" ColumnName="KID" />
+                <ScalarProperty Name="ForetagsNamn" ColumnName="ForetagsNamn" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="AsciModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vPresentations">
+            <EntityTypeMapping TypeName="AsciModel.vPresentation">
+              <MappingFragment StoreEntitySet="vPresentation">
+                <ScalarProperty Name="ForetagsNamn" ColumnName="ForetagsNamn" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="FID" ColumnName="FID" />
+                <ScalarProperty Name="ArbetsTimmar" ColumnName="ArbetsTimmar" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="ArbetsPeriod" ColumnName="ArbetsPeriod" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

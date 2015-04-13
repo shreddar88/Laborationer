@@ -1,0 +1,22 @@
+﻿.navbar-inverse 
+{
+    background-color:#e2f370 !important; 
+    color: black !important; 
+    
+}
+
+.sokruta
+{
+    
+    margin-left: 80% !important;
+}
+
+.lada
+{
+    border: solid 1px;
+}
+
+.forstasid{
+    background-image: url("/Content/bild.jpg")
+
+}
